@@ -75,7 +75,8 @@ h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;letter-spacing:-.00
 .bench{background:var(--panel);border:1px solid var(--rule);border-radius:14px;overflow:hidden;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px;background-position:-1px -1px}
 .bench-head{display:flex;justify-content:space-between;gap:12px;padding:14px 20px 0;font-size:14px;color:var(--steel)}
-.scheme{display:block;width:100%;height:auto;padding:4px 8px 0}
+.scheme{display:block;width:100%;height:auto;padding:4px 8px 0;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.scheme .lbl{cursor:pointer}
 .scheme .ln{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
 .scheme .thin{stroke-width:1;opacity:.55}
 .scheme .body{fill:var(--panel)}
@@ -580,6 +581,8 @@ function buildScheme(){
     const pos = txt || (anchor === "end" ? [b[0]-8,b[1]+4] : [b[0]+6,b[1]+4]);
     t.setAttribute("x",pos[0]); t.setAttribute("y",pos[1]);
     t.setAttribute("text-anchor",anchor); t.setAttribute("class","lbl"); t.dataset.for = part;
+    t.addEventListener("mouseenter", () => { stopCycle(); setPart(part); });
+    t.addEventListener("click", () => { stopCycle(); setPart(part); });
     g.append(line, dot, t);
   });
   document.querySelectorAll("#scheme .ln").forEach(el => el.setAttribute("pathLength","1"));

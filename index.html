@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ремонт ноутбуков и ПК в Нови-Саде</title>
+<meta name="description" content="Ремонт ноутбуков, компьютеров, MacBook и PlayStation в Нови-Саде. Выезд мастера на дом, бесплатная диагностика, ноутбуки в наличии.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Tektur:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDF1; --panel:#F7F9FA; --ink:#142230; --steel:#56677A; --rule:#C5CED7;
+  --amber:#D88A1E; --amber-text:#9A5A00; --amber-soft:rgba(216,138,30,.18);
+  --readout:#142230; --readout-text:#E9EDF1; --readout-muted:#93A3B3;
+  --grid:rgba(20,34,48,.06);
+  --display:"Tektur",system-ui,sans-serif; --body:"Onest",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121B24; --panel:#1A2632; --ink:#E4EAF0; --steel:#93A3B3; --rule:#2C3A48;
+    --amber:#E89B32; --amber-text:#F0AA45; --amber-soft:rgba(232,155,50,.2);
+    --readout:#0C141C; --readout-text:#E4EAF0; --readout-muted:#8394A5;
+    --grid:rgba(228,234,240,.05);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121B24; --panel:#1A2632; --ink:#E4EAF0; --steel:#93A3B3; --rule:#2C3A48;
+  --amber:#E89B32; --amber-text:#F0AA45; --amber-soft:rgba(232,155,50,.2);
+  --readout:#0C141C; --readout-text:#E4EAF0; --readout-muted:#8394A5;
+  --grid:rgba(228,234,240,.05);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;letter-spacing:-.005em}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.brand{text-decoration:none;display:flex;flex-direction:column;line-height:1.15}
+.brand b{font:700 21px var(--display)}
+.brand span{font-size:13px;color:var(--steel)}
+.menu{display:flex;gap:24px;margin-left:auto}
+.menu a{text-decoration:none;color:var(--steel);font-weight:500;font-size:15px}
+.menu a:hover{color:var(--ink)}
+.top-phone{font:600 16px var(--display);text-decoration:none;white-space:nowrap}
+.lang{display:flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.lang button{border:0;background:none;color:var(--steel);font:600 13px var(--body);padding:6px 11px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:8px;padding:15px 24px;font:600 16px var(--body);text-decoration:none;cursor:pointer;transition:background-color .15s,color .15s}
+.btn-main{background:var(--ink);color:var(--paper)}
+.btn-main:hover{background:var(--amber);color:#142230}
+.btn-line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--paper)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:56px;align-items:center}
+.hero h1{font-size:clamp(36px,4.6vw,58px);line-height:1.04;margin-bottom:22px}
+.hero .lead{font-size:19px;color:var(--steel);max-width:30em;margin:0 0 32px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.pads{list-style:none;padding:0;margin:36px 0 0;display:grid;gap:10px}
+.pads li{display:flex;align-items:center;gap:12px;font-weight:500}
+.pads li::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--amber);flex:none}
+
+/* schematic */
+.bench{background:var(--panel);border:1px solid var(--rule);border-radius:14px;overflow:hidden;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px;background-position:-1px -1px}
+.bench-head{display:flex;justify-content:space-between;gap:12px;padding:14px 20px 0;font-size:14px;color:var(--steel)}
+.scheme{display:block;width:100%;height:auto;padding:4px 8px 0}
+.scheme .ln{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.scheme .thin{stroke-width:1;opacity:.55}
+.scheme .body{fill:var(--panel)}
+.scheme .part{cursor:pointer;outline:none}
+.scheme .part .hit{fill:transparent;stroke:none}
+.scheme .part .fillable{fill:var(--panel);transition:fill .2s}
+.scheme .part .ln{transition:stroke .2s}
+.scheme .part.on .ln{stroke:var(--amber)}
+.scheme .part.on .fillable{fill:var(--amber-soft)}
+.scheme .part:focus-visible .ln{stroke:var(--amber);stroke-width:2.4}
+.scheme .pipe{fill:none;stroke:var(--amber);stroke-width:5;stroke-linecap:round;opacity:.85}
+.scheme .lbl{font:500 13px var(--body);fill:var(--steel);transition:fill .2s}
+.scheme .lbl.on{fill:var(--amber-text);font-weight:600}
+.scheme .lead-ln{fill:none;stroke:var(--steel);stroke-width:1;stroke-dasharray:3 3}
+.scheme .lead-ln.on{stroke:var(--amber);stroke-dasharray:none}
+.scheme .dot{fill:var(--steel)}
+.scheme .dot.on{fill:var(--amber)}
+.scheme.draw .ln{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.3s cubic-bezier(.6,.1,.3,1) forwards}
+.scheme.draw .fillable,.scheme.draw .pipe,.scheme.draw .lbl,.scheme.draw .lead-ln,.scheme.draw .dot{opacity:0;animation:appear .5s 1.1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes appear{to{opacity:1}}
+.scheme.draw .pipe{animation-name:appearPipe}
+@keyframes appearPipe{to{opacity:.85}}
+
+.readout{margin:8px 12px 12px;background:var(--readout);color:var(--readout-text);border-radius:8px;padding:18px 22px;display:grid;grid-template-columns:1fr auto;gap:6px 24px;align-items:end;min-height:96px}
+.readout h3{font-size:21px;font-weight:600}
+.readout p{margin:2px 0 0;color:var(--readout-muted);font-size:15px}
+.readout .val{text-align:right}
+.readout .val b{display:block;font:600 28px/1.1 var(--display);color:var(--amber);white-space:nowrap}
+.readout .val span{font-size:14px;color:var(--readout-muted)}
+.part-chips{display:none;gap:6px;flex-wrap:wrap;padding:0 12px 14px}
+.part-chips button{border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:6px;padding:7px 11px;font:500 14px var(--body);cursor:pointer}
+.part-chips button[aria-pressed="true"]{border-color:var(--amber);background:var(--amber-soft)}
+
+/* ---------- sections ---------- */
+.block{padding:88px 0;border-top:1px solid var(--rule)}
+.block-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.block-head h2{font-size:clamp(30px,3.4vw,42px);line-height:1.1}
+.block-head p{margin:10px 0 0;color:var(--steel);max-width:36em}
+
+.tabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:4px;flex-wrap:wrap}
+.tabs button{border:0;background:none;color:var(--steel);font:600 15px var(--body);padding:9px 16px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+
+.prices{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.prices th{text-align:left;font:500 14px var(--body);color:var(--steel);padding:14px 24px;border-bottom:1px solid var(--rule)}
+.prices td{padding:18px 24px;border-bottom:1px solid var(--rule);vertical-align:top}
+.prices tr:last-child td{border-bottom:0}
+.prices td b{display:block;font-weight:600}
+.prices td small{color:var(--steel);font-size:15px}
+.prices .t{color:var(--steel);white-space:nowrap;width:1%}
+.prices .p{font:600 19px var(--display);white-space:nowrap;text-align:right;width:1%}
+.prices .p.free{color:var(--amber-text)}
+.prices th:last-child{text-align:right}
+.price-note{margin:16px 0 0;font-size:15px;color:var(--steel)}
+
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filters button{border:1px solid var(--rule);background:transparent;color:var(--ink);border-radius:6px;padding:8px 14px;font:500 15px var(--body);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.stock{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lap{background:var(--panel);border:1px solid var(--rule);border-radius:12px;display:flex;flex-direction:column;overflow:hidden}
+.lap figure{margin:0;aspect-ratio:16/10;display:grid;place-items:center;border-bottom:1px solid var(--rule);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:16px 16px}
+.lap figure img{width:100%;height:100%;object-fit:cover}
+.lap figure svg{width:52%}
+.lap .in{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.lap h3{font-size:19px;margin-bottom:12px}
+.lap dl{margin:0 0 18px;display:grid;grid-template-columns:auto 1fr;gap:5px 14px;font-size:15px;flex:1}
+.lap dt{color:var(--steel)}
+.lap dd{margin:0}
+.lap .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:16px;border-top:1px dashed var(--rule)}
+.lap .cost{font:600 22px var(--display);white-space:nowrap}
+.lap .btn{padding:10px 14px;font-size:15px}
+.stock-note{margin:18px 0 0;font-size:15px;color:var(--steel)}
+
+.route{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;position:relative}
+.route::before{content:"";position:absolute;left:18px;right:calc((100% - 84px) / 4 - 19px);top:18px;height:2px;background:var(--amber)}
+.route li{position:relative}
+.route .via{width:38px;height:38px;border-radius:50%;background:var(--paper);border:2px solid var(--amber);display:grid;place-items:center;font:600 16px var(--display);margin-bottom:18px;position:relative}
+.route h3{font-size:20px;margin-bottom:6px}
+.route p{margin:0;color:var(--steel);font-size:16px}
+
+.tape{background:var(--amber);color:#142230}
+.tape .wrap{display:flex;justify-content:space-between;align-items:center;gap:28px;padding-top:44px;padding-bottom:44px;flex-wrap:wrap}
+.tape h2{font-size:clamp(24px,2.8vw,34px);line-height:1.15;max-width:22em}
+.tape p{margin:8px 0 0;font-size:17px}
+.tape .btn{background:#142230;color:#F7F9FA}
+.tape .btn:hover{background:#F7F9FA;color:#142230}
+
+.contact{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
+.contact .big{font:600 clamp(32px,4.4vw,52px)/1.05 var(--display);text-decoration:none;display:inline-block;margin:8px 0 20px}
+.contact .big:hover{color:var(--amber-text)}
+.contact .links{display:flex;gap:10px;flex-wrap:wrap}
+.facts{margin:0;display:grid;gap:0;border-top:1px solid var(--rule)}
+.facts div{display:grid;grid-template-columns:160px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.facts dt{color:var(--steel)}
+.facts dd{margin:0;font-weight:500}
+
+footer{padding:28px 0 40px;color:var(--steel);font-size:14px;border-top:1px solid var(--rule)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.fab{position:fixed;left:16px;right:16px;bottom:16px;z-index:30;display:none}
+
+dialog{border:1px solid var(--rule);border-radius:14px;padding:0;max-width:460px;width:calc(100% - 32px);background:var(--panel);color:var(--ink)}
+dialog::backdrop{background:rgba(10,17,24,.55)}
+.dlg{padding:28px}
+.dlg h3{font-size:24px;margin-bottom:6px}
+.dlg > p{margin:0 0 14px;color:var(--steel);font-size:15px}
+.dlg label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+.dlg input,.dlg select,.dlg textarea{width:100%;padding:12px 14px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);font:16px var(--body)}
+.dlg textarea{resize:vertical}
+.dlg .acts{display:flex;gap:10px;margin-top:22px}
+.dlg .acts .btn{flex:1}
+
+@media (max-width:1020px){
+  .menu{display:none}
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .stock{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contact{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .wrap{padding:0 16px}
+  .top .wrap{gap:12px}
+  .top-phone{display:none}
+  .lang{margin-left:auto}
+  .hero{padding:36px 0 56px}
+  .scheme .lbl,.scheme .lead-ln,.scheme .dot{display:none}
+  .part-chips{display:flex}
+  .readout{grid-template-columns:1fr}
+  .readout .val{text-align:left}
+  .block{padding:60px 0}
+  .stock{grid-template-columns:1fr}
+  .prices th,.prices td{padding:14px 16px}
+  .prices .t{display:none}
+  .route{grid-template-columns:1fr;gap:24px}
+  .route::before{left:18px;right:auto;top:18px;bottom:18px;width:2px;height:auto}
+  .route li{padding-left:58px}
+  .route .via{position:absolute;left:0;top:0}
+  .facts div{grid-template-columns:1fr;gap:2px}
+  .fab{display:flex}
+  footer{padding-bottom:96px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .scheme.draw .ln,.scheme.draw .fillable,.scheme.draw .pipe,.scheme.draw .lbl,.scheme.draw .lead-ln,.scheme.draw .dot{animation:none;stroke-dasharray:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><b data-k="name"></b><span data-k="tagline"></span></a>
+    <nav class="menu">
+      <a href="#prices" data-k="navPrices"></a>
+      <a href="#stock" data-k="navStock"></a>
+      <a href="#route" data-k="navRoute"></a>
+      <a href="#contact" data-k="navContact"></a>
+    </nav>
+    <a class="top-phone" data-phone></a>
+    <div class="lang" role="group" aria-label="Language"><button data-l="ru">RU</button><button data-l="sr">SR</button></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1 data-k="h1"></h1>
+        <p class="lead" data-k="lead"></p>
+        <div class="cta">
+          <button class="btn btn-main" data-open data-k="callMaster"></button>
+          <a class="btn btn-line" data-phone-btn></a>
+        </div>
+        <ul class="pads" id="pads"></ul>
+      </div>
+
+      <div class="bench">
+        <div class="bench-head"><span data-k="benchHint"></span></div>
+        <svg class="scheme" id="scheme" viewBox="-30 0 700 410" role="group" aria-labelledby="schemeTitle">
+          <title id="schemeTitle" data-k="benchHint"></title>
+          <!-- chassis -->
+          <rect class="ln body" x="110" y="40" width="420" height="300" rx="18"/>
+          <rect class="ln thin" x="118" y="48" width="404" height="284" rx="12"/>
+
+          <!-- board -->
+          <g class="part" data-part="board" tabindex="0" role="button">
+            <path class="ln fillable" d="M140 66 H498 V184 H410 V202 H232 V184 H140 Z"/>
+            <rect class="ln" x="290" y="92" width="58" height="58" rx="3"/>
+            <rect class="ln" x="305" y="107" width="28" height="28" rx="2"/>
+            <rect class="ln thin" x="252" y="160" width="22" height="14" rx="1"/>
+            <rect class="ln thin" x="364" y="170" width="18" height="10" rx="1"/>
+            <rect class="ln" x="262" y="186" width="56" height="10" rx="1"/>
+            <path class="ln thin" d="M348 121 H362 M319 150 V164 M276 167 H290 V150"/>
+          </g>
+
+          <!-- fan + heatpipe -->
+          <g class="part" data-part="fan" tabindex="0" role="button">
+            <rect class="ln fillable" x="142" y="80" width="14" height="76" rx="2"/>
+            <path class="ln thin" d="M146 88 H152 M146 98 H152 M146 108 H152 M146 118 H152 M146 128 H152 M146 138 H152 M146 148 H152"/>
+            <path class="ln fillable" d="M156 80 H210 A42 42 0 1 1 156 156 Z"/>
+            <circle class="ln" cx="200" cy="118" r="33"/>
+            <g id="blades"></g>
+            <circle class="ln fillable" cx="200" cy="118" r="9"/>
+            <path class="pipe" d="M232 104 C 260 96, 270 116, 300 112"/>
+          </g>
+
+          <!-- RAM -->
+          <g class="part" data-part="ram" tabindex="0" role="button">
+            <rect class="ln fillable" x="372" y="80" width="112" height="22" rx="2"/>
+            <rect class="ln fillable" x="372" y="108" width="112" height="22" rx="2"/>
+            <path class="ln thin" d="M384 86 h12 v10 h-12 z M404 86 h12 v10 h-12 z M424 86 h12 v10 h-12 z M444 86 h12 v10 h-12 z M384 114 h12 v10 h-12 z M404 114 h12 v10 h-12 z M424 114 h12 v10 h-12 z M444 114 h12 v10 h-12 z"/>
+          </g>
+
+          <!-- SSD -->
+          <g class="part" data-part="ssd" tabindex="0" role="button">
+            <rect class="ln fillable" x="372" y="144" width="92" height="20" rx="2"/>
+            <path class="ln thin" d="M382 149 h20 v10 h-20 z M408 149 h20 v10 h-20 z M436 151 h8 v6 h-8 z"/>
+            <circle class="ln thin" cx="458" cy="154" r="3"/>
+          </g>
+
+          <!-- DC jack -->
+          <g class="part" data-part="dc" tabindex="0" role="button">
+            <rect class="ln fillable" x="496" y="146" width="34" height="24" rx="2"/>
+            <circle class="ln" cx="516" cy="158" r="6"/>
+          </g>
+
+          <!-- battery -->
+          <g class="part" data-part="battery" tabindex="0" role="button">
+            <rect class="ln fillable" x="176" y="216" width="288" height="96" rx="6"/>
+            <path class="ln thin" d="M248 222 V306 M320 222 V306 M392 222 V306"/>
+            <rect class="ln" x="300" y="208" width="40" height="8" rx="1"/>
+          </g>
+
+          <!-- speakers -->
+          <g class="part" data-part="speakers" tabindex="0" role="button">
+            <rect class="ln fillable" x="128" y="236" width="32" height="76" rx="9"/>
+            <rect class="ln fillable" x="480" y="236" width="32" height="76" rx="9"/>
+            <path class="ln thin" d="M138 250 v48 M150 250 v48 M490 250 v48 M502 250 v48"/>
+          </g>
+
+          <!-- screws -->
+          <g>
+            <circle class="ln" cx="132" cy="60" r="5"/><circle class="ln" cx="508" cy="60" r="5"/>
+            <circle class="ln" cx="132" cy="322" r="5"/><circle class="ln" cx="508" cy="322" r="5"/>
+            <path class="ln thin" d="M129 60 h6 M132 57 v6 M505 60 h6 M508 57 v6 M129 322 h6 M132 319 v6 M505 322 h6 M508 319 v6"/>
+          </g>
+
+          <!-- callouts -->
+          <g id="callouts"></g>
+        </svg>
+        <div class="part-chips" id="partChips"></div>
+        <div class="readout" id="readout" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="prices">
+    <div class="wrap">
+      <div class="block-head">
+        <div><h2 data-k="pricesTitle"></h2><p data-k="pricesSub"></p></div>
+        <div class="tabs" role="tablist" id="tabs"></div>
+      </div>
+      <table class="prices">
+        <thead><tr><th data-k="colWork"></th><th class="t" data-k="colTime"></th><th data-k="colPrice"></th></tr></thead>
+        <tbody id="priceRows"></tbody>
+      </table>
+      <p class="price-note" data-k="priceNote"></p>
+    </div>
+  </section>
+
+  <section class="block" id="stock">
+    <div class="wrap">
+      <div class="block-head">
+        <div><h2 data-k="stockTitle"></h2><p data-k="stockSub"></p></div>
+        <div class="filters" id="filters"></div>
+      </div>
+      <div class="stock" id="stockList"></div>
+      <p class="stock-note" data-k="stockNote"></p>
+    </div>
+  </section>
+
+  <section class="block" id="route">
+    <div class="wrap">
+      <div class="block-head"><h2 data-k="routeTitle"></h2></div>
+      <ol class="route" id="routeList"></ol>
+    </div>
+  </section>
+
+  <section class="tape">
+    <div class="wrap">
+      <div><h2 data-k="tapeTitle"></h2><p data-k="tapeSub"></p></div>
+      <a class="btn" target="_blank" rel="noopener" data-wa data-k="writeWa"></a>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="wrap contact">
+      <div>
+        <h2 data-k="contactTitle"></h2>
+        <a class="big" data-phone></a>
+        <div class="links">
+          <a class="btn btn-main" target="_blank" rel="noopener" data-wa>WhatsApp</a>
+          <a class="btn btn-line" id="viber">Viber</a>
+          <button class="btn btn-line" data-open data-k="callMaster"></button>
+        </div>
+      </div>
+      <dl class="facts" id="facts"></dl>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span id="copy"></span><a data-phone></a></div></footer>
+
+<button class="btn btn-main fab" data-open data-k="callMaster"></button>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <form class="dlg" method="dialog" id="form">
+    <h3 id="dlgTitle" data-k="formTitle"></h3>
+    <p data-k="formSub"></p>
+    <label for="fName" data-k="fName"></label><input id="fName" name="name" required autocomplete="name">
+    <label for="fDevice" data-k="fDevice"></label><select id="fDevice" name="device"></select>
+    <label for="fArea" data-k="fArea"></label><input id="fArea" name="area">
+    <label for="fProblem" data-k="fProblem"></label><textarea id="fProblem" name="problem" rows="3"></textarea>
+    <div class="acts">
+      <button class="btn btn-line" value="cancel" formnovalidate data-k="cancel"></button>
+      <button class="btn btn-main" value="send" data-k="send"></button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+/* ============ ДАННЫЕ МАСТЕРА — ЗАМЕНИТЬ ============ */
+const CONFIG = {
+  phone: "+381 60 000 0000",   // телефон для сайта
+  whatsapp: "381600000000",    // номер WhatsApp / Viber без «+»
+  warrantyMonths: 3
+};
+
+// Детали на схеме: цена работы «от», в динарах
+const PARTS = {
+  fan:      { price:1500, short:{ru:"Кулер",sr:"Ventilator"}, ru:["Кулер и термопаста","Шумит, греется, выключается в играх","1 час"],            sr:["Ventilator i termalna pasta","Buči, greje se, gasi se u igricama","1 sat"] },
+  board:    { price:3000, short:{ru:"Плата",sr:"Ploča"}, ru:["Плата и процессор","Не включается, залили водой, нет изображения","1–3 дня"], sr:["Matična ploča i procesor","Ne pali se, prosuta tečnost, nema slike","1–3 dana"] },
+  ram:      { price:500, short:{ru:"Память",sr:"RAM"},  ru:["Оперативная память","Тормозит, синий экран, не хватает памяти","30 минут"],   sr:["RAM memorija","Usporava, plavi ekran, nema dovoljno memorije","30 minuta"] },
+  ssd:      { price:1000, short:{ru:"SSD",sr:"SSD"}, ru:["SSD-диск","Долго включается, закончилось место","1 час"],                     sr:["SSD disk","Sporo se pali, nema mesta","1 sat"] },
+  dc:       { price:1500, short:{ru:"Разъём питания",sr:"Konektor"}, ru:["Разъём питания","Не заряжается или надо шевелить кабель","В тот же день"],    sr:["Konektor za punjenje","Ne puni se ili treba pomerati kabl","Isti dan"] },
+  battery:  { price:1000, short:{ru:"Аккумулятор",sr:"Baterija"}, ru:["Аккумулятор","Быстро садится или вздулся","1 час"],                           sr:["Baterija","Brzo se prazni ili je naduvana","1 sat"] },
+  speakers: { price:1000, short:{ru:"Динамики",sr:"Zvučnici"}, ru:["Динамики","Хрипят или пропал звук","1 час"],                                  sr:["Zvučnici","Krče ili nema zvuka","1 sat"] }
+};
+const CYCLE = ["fan","board","dc","battery","ssd","ram","speakers"];
+// callout: [part, точка на детали, излом, конец линии, якорь текста]
+const CALLOUTS = [
+  ["fan",      [176,96],  [96,96],  "end"],
+  ["speakers", [128,274], [96,274], "end"],
+  ["board",    [319,92],  [319,20], "start", [326,24]],
+  ["ram",      [484,91],  [544,91], "start"],
+  ["ssd",      [464,150], [544,128],"start"],
+  ["dc",       [530,164], [544,180],"start"],
+  ["battery",  [320,312], [320,376],"middle",[320,394]]
+];
+
+// Прайс: цена «от» в динарах, 0 = бесплатно
+const PRICES = {
+  laptop:[
+    {price:0,    ru:["Диагностика","Найду причину и назову цену до начала ремонта","20 минут"], sr:["Dijagnostika","Pronalazim uzrok i kažem cenu pre popravke","20 minuta"]},
+    {price:1500, ru:["Чистка и замена термопасты","Если ноутбук шумит и греется","1 час"], sr:["Čišćenje i termalna pasta","Ako laptop buči i greje se","1 sat"]},
+    {price:3000, ru:["Замена экрана","Разбит, полосы, не показывает","1–2 дня"], sr:["Zamena ekrana","Polomljen, linije, ne prikazuje","1–2 dana"]},
+    {price:2000, ru:["Замена клавиатуры","Не работают клавиши, после залития","1 день"], sr:["Zamena tastature","Ne rade tasteri, posle prosipanja","1 dan"]},
+    {price:1500, ru:["Ремонт разъёма питания","Не заряжается, болтается штекер","В тот же день"], sr:["Popravka konektora za punjenje","Ne puni se, klima se punjač","Isti dan"]},
+    {price:3000, ru:["Ремонт платы","Не включается, после залития","1–3 дня"], sr:["Popravka ploče","Ne pali se, posle prosipanja","1–3 dana"]},
+    {price:1000, ru:["Установка SSD","Ноутбук будет включаться за 15 секунд","1 час"], sr:["Ugradnja SSD-a","Laptop se pali za 15 sekundi","1 sat"]},
+    {price:1500, ru:["Установка Windows","С драйверами, программами и переносом файлов","2 часа"], sr:["Instalacija Windows-a","Sa drajverima, programima i prenosom fajlova","2 sata"]}
+  ],
+  pc:[
+    {price:0,    ru:["Диагностика","Приеду и посмотрю на месте","30 минут"], sr:["Dijagnostika","Dolazim i proveravam na licu mesta","30 minuta"]},
+    {price:1000, ru:["Не включается","Блок питания, кнопка, плата","1 день"], sr:["Ne pali se","Napajanje, dugme, ploča","1 dan"]},
+    {price:1500, ru:["Чистка от пыли","С заменой термопасты на процессоре","1 час"], sr:["Čišćenje od prašine","Sa zamenom termalne paste","1 sat"]},
+    {price:1000, ru:["Апгрейд","Поставлю SSD, память или видеокарту","1 час"], sr:["Nadogradnja","Ugrađujem SSD, memoriju ili grafičku","1 sat"]},
+    {price:2500, ru:["Сборка компьютера","Подберу детали под ваш бюджет","1 день"], sr:["Sklapanje računara","Biram delove po vašem budžetu","1 dan"]},
+    {price:1500, ru:["Установка Windows","С драйверами и программами","2 часа"], sr:["Instalacija Windows-a","Sa drajverima i programima","2 sata"]}
+  ],
+  apple:[
+    {price:0,    ru:["Диагностика MacBook и iMac","Найду причину и назову цену","30 минут"], sr:["Dijagnostika MacBook i iMac","Pronalazim uzrok i kažem cenu","30 minuta"]},
+    {price:2500, ru:["Чистка MacBook","Если греется и шумит вентилятор","2 часа"], sr:["Čišćenje MacBook-a","Ako se greje i buči ventilator","2 sata"]},
+    {price:2000, ru:["Замена аккумулятора","Держит меньше двух часов или вздулся","1 день"], sr:["Zamena baterije","Traje manje od dva sata ili je naduvana","1 dan"]},
+    {price:4000, ru:["Ремонт после залития","Чем раньше принесёте, тем дешевле","2–4 дня"], sr:["Popravka posle prosipanja","Što pre donesete, to jeftinije","2–4 dana"]},
+    {price:2000, ru:["Установка macOS","Переустановка системы с сохранением файлов","2 часа"], sr:["Instalacija macOS-a","Reinstalacija sistema sa čuvanjem fajlova","2 sata"]}
+  ],
+  ps:[
+    {price:2000, ru:["Чистка и термопаста PS4 / PS5","Если консоль шумит как самолёт","2 часа"], sr:["Čišćenje i termalna pasta PS4 / PS5","Ako konzola buči kao avion","2 sata"]},
+    {price:3500, ru:["Замена HDMI-порта","Нет изображения на телевизоре","1 день"], sr:["Zamena HDMI porta","Nema slike na televizoru","1 dan"]},
+    {price:2500, ru:["Ремонт дисковода","Не читает или не принимает диски","1–2 дня"], sr:["Popravka čitača","Ne čita ili ne prima diskove","1–2 dana"]},
+    {price:2000, ru:["Ошибки и прошивка","Не запускается, синий свет, ошибки при старте","1 день"], sr:["Greške i softver","Ne pokreće se, plavo svetlo, greške","1 dan"]},
+    {price:1500, ru:["Ремонт геймпада","Дрифт стиков, не заряжается","1 день"], sr:["Popravka džojstika","Drift palica, ne puni se","1 dan"]}
+  ]
+};
+
+// Ноутбуки в наличии. photo: путь к фото, напр. "img/t480.jpg"
+const LAPTOPS = [
+  { cat:"work",   name:"Lenovo ThinkPad T480",  screen:'14" Full HD',      cpu:"Intel Core i5-8350U", ram:"16 GB", disk:"SSD 256 GB", price:32000, photo:"" },
+  { cat:"apple",  name:"MacBook Air 13 M1",     screen:'13,3" Retina',     cpu:"Apple M1",            ram:"8 GB",  disk:"SSD 256 GB", price:68000, photo:"" },
+  { cat:"gaming", name:"ASUS TUF Gaming F15",   screen:'15,6" 144 Hz',     cpu:"i5-10300H, GTX 1650", ram:"16 GB", disk:"SSD 512 GB", price:62000, photo:"" },
+  { cat:"work",   name:"HP EliteBook 840 G5",   screen:'14" Full HD',      cpu:"Intel Core i5-8250U", ram:"8 GB",  disk:"SSD 256 GB", price:28000, photo:"" },
+  { cat:"work",   name:"Dell Latitude 5490",    screen:'14" HD',           cpu:"Intel Core i5-8250U", ram:"8 GB",  disk:"SSD 256 GB", price:26000, photo:"" },
+  { cat:"gaming", name:"Lenovo Legion 5",       screen:'15,6" 120 Hz',     cpu:"Ryzen 5 4600H, GTX 1660 Ti", ram:"16 GB", disk:"SSD 512 GB", price:75000, photo:"" }
+];
+/* =================================================== */
+
+const T = {
+  ru:{
+    name:"Андрей", tagline:"Ремонт техники в Нови-Саде",
+    navPrices:"Цены", navStock:"Ноутбуки", navRoute:"Как работаю", navContact:"Контакты",
+    h1:"Ремонт ноутбуков, ПК, MacBook и PlayStation в Нови‑Саде",
+    lead:"Приеду к вам домой или в офис, найду причину и назову цену до начала работы. Говорю по-русски и по-сербски.",
+    callMaster:"Вызвать мастера на дом", call:"Позвонить",
+    pads:["Диагностика бесплатно","Выезд в день обращения","Гарантия на работу и запчасти"],
+    benchHint:"Нажмите на деталь, чтобы узнать цену ремонта",
+    from:"от", cur:"RSD", free:"Бесплатно", work:"Работа", time:"Срок",
+    pricesTitle:"Цены на ремонт", pricesSub:"Цена за работу. Точную сумму с запчастями назову после диагностики, до начала ремонта.",
+    tabs:{laptop:"Ноутбуки",pc:"Компьютеры",apple:"Apple",ps:"PlayStation"},
+    colWork:"Работа", colTime:"Срок", colPrice:"Цена",
+    priceNote:"Если не получится починить, за диагностику и выезд платить не нужно.",
+    stockTitle:"Ноутбуки в наличии", stockSub:"Каждый проверил и почистил сам. Можно приехать посмотреть или я привезу.",
+    filters:{all:"Все",work:"Для работы и учёбы",apple:"Apple",gaming:"Игровые"},
+    spec:["Экран","Процессор","Память","Диск"], ask:"Спросить",
+    stockNote:"Гарантия на ноутбуки — {m} месяца. Список обновляю каждую неделю.",
+    routeTitle:"Как проходит ремонт",
+    route:[["Заявка","Позвоните или напишите в WhatsApp. Отвечаю в течение 15 минут."],["Выезд","Приеду в удобное время или заберу технику в мастерскую."],["Диагностика","Найду причину и скажу точную цену. Решаете вы."],["Ремонт","Починю, проверю при вас и дам гарантию."]],
+    tapeTitle:"Не знаете, что сломалось?", tapeSub:"Опишите проблему в WhatsApp, и я скажу, сколько примерно будет стоить ремонт.",
+    writeWa:"Написать в WhatsApp",
+    contactTitle:"Звоните или пишите",
+    facts:[["Где работаю","Нови-Сад, Петроварадин, Сремска-Каменица, Футог"],["Часы работы","Пн–Сб, 9:00–20:00"],["Языки","Русский, сербский"],["Оплата","Наличные или перевод на карту"]],
+    copy:"© {y} Андрей, ремонт техники в Нови-Саде",
+    formTitle:"Вызов мастера", formSub:"Заявка откроется в WhatsApp. Перезвоню в течение 15 минут.",
+    fName:"Имя", fDevice:"Что сломалось", fArea:"Район или адрес", fProblem:"Опишите проблему",
+    devices:["Ноутбук","Компьютер","MacBook или iMac","PlayStation","Другое"],
+    cancel:"Отмена", send:"Отправить заявку",
+    waHi:"Здравствуйте, Андрей! Нужен ремонт.", waLap:"Здравствуйте! Интересует ноутбук"
+  },
+  sr:{
+    name:"Andrej", tagline:"Servis računara u Novom Sadu",
+    navPrices:"Cene", navStock:"Laptopovi", navRoute:"Kako radim", navContact:"Kontakt",
+    h1:"Popravka laptopova, računara, MacBook-a i PlayStation-a u Novom Sadu",
+    lead:"Dolazim kod vas kući ili u kancelariju, pronalazim kvar i kažem cenu pre početka rada. Govorim srpski i ruski.",
+    callMaster:"Pozovi majstora na adresu", call:"Pozovi",
+    pads:["Besplatna dijagnostika","Dolazak istog dana","Garancija na rad i delove"],
+    benchHint:"Kliknite na deo da vidite cenu popravke",
+    from:"od", cur:"RSD", free:"Besplatno", work:"Rad", time:"Rok",
+    pricesTitle:"Cene popravki", pricesSub:"Cena rada. Tačan iznos sa delovima kažem posle dijagnostike, pre početka popravke.",
+    tabs:{laptop:"Laptopovi",pc:"Računari",apple:"Apple",ps:"PlayStation"},
+    colWork:"Usluga", colTime:"Rok", colPrice:"Cena",
+    priceNote:"Ako ne uspem da popravim, dijagnostika i dolazak se ne plaćaju.",
+    stockTitle:"Laptopovi na stanju", stockSub:"Svaki sam lično proverio i očistio. Možete doći da pogledate ili ga donosim.",
+    filters:{all:"Svi",work:"Za posao i školu",apple:"Apple",gaming:"Gejmerski"},
+    spec:["Ekran","Procesor","Memorija","Disk"], ask:"Pitaj",
+    stockNote:"Garancija na laptopove je {m} meseca. Spisak ažuriram svake nedelje.",
+    routeTitle:"Kako izgleda popravka",
+    route:[["Zahtev","Pozovite ili pišite na WhatsApp. Odgovaram u roku od 15 minuta."],["Dolazak","Dolazim kad vam odgovara ili nosim uređaj u radionicu."],["Dijagnostika","Pronalazim kvar i kažem tačnu cenu. Vi odlučujete."],["Popravka","Popravljam, testiram pred vama i dajem garanciju."]],
+    tapeTitle:"Ne znate šta se pokvarilo?", tapeSub:"Opišite problem na WhatsApp-u i reći ću vam okvirnu cenu popravke.",
+    writeWa:"Piši na WhatsApp",
+    contactTitle:"Pozovite ili pišite",
+    facts:[["Gde radim","Novi Sad, Petrovaradin, Sremska Kamenica, Futog"],["Radno vreme","Pon–Sub, 9:00–20:00"],["Jezici","Srpski, ruski"],["Plaćanje","Gotovina ili uplata na račun"]],
+    copy:"© {y} Andrej, servis računara u Novom Sadu",
+    formTitle:"Poziv majstora", formSub:"Zahtev se otvara u WhatsApp-u. Javljam se u roku od 15 minuta.",
+    fName:"Ime", fDevice:"Šta se pokvarilo", fArea:"Deo grada ili adresa", fProblem:"Opišite problem",
+    devices:["Laptop","Računar","MacBook ili iMac","PlayStation","Drugo"],
+    cancel:"Otkaži", send:"Pošalji zahtev",
+    waHi:"Zdravo, Andrej! Treba mi popravka.", waLap:"Zdravo! Zanima me laptop"
+  }
+};
+
+const $ = id => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+const fmt = n => n.toLocaleString("ru-RU").replace(/ /g," ");
+const wa = text => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+const phoneIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>';
+const laptopSvg = '<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" style="color:var(--ink)"><rect x="18" y="6" width="84" height="54" rx="4"/><rect x="24" y="12" width="72" height="42" rx="1" opacity=".4"/><path d="M6 66 h108 l-6 8 H12 z"/><path d="M50 66 h20" opacity=".5"/><circle cx="60" cy="9" r="1.2" fill="var(--amber)" stroke="none"/></svg>';
+
+let lang = "ru", tab = "laptop", filter = "all", active = "fan", cycleTimer = null;
+try { lang = localStorage.getItem("lang") || (navigator.language.startsWith("sr") ? "sr" : "ru"); } catch(e) {}
+
+/* ---------- schematic ---------- */
+function buildScheme(){
+  const blades = $("blades");
+  for (let i = 0; i < 7; i++){
+    const p = document.createElementNS(NS,"path");
+    p.setAttribute("class","ln thin");
+    p.setAttribute("d","M200 109 C 208 98, 222 96, 230 104");
+    p.setAttribute("transform",`rotate(${i*360/7} 200 118)`);
+    blades.appendChild(p);
+  }
+  const g = $("callouts");
+  CALLOUTS.forEach(([part, a, b, anchor, txt]) => {
+    const line = document.createElementNS(NS,"polyline");
+    const end = anchor === "end" ? [b[0]-4,b[1]] : b;
+    line.setAttribute("points",`${a} ${end}`);
+    line.setAttribute("class","lead-ln"); line.dataset.for = part;
+    const dot = document.createElementNS(NS,"circle");
+    dot.setAttribute("cx",a[0]); dot.setAttribute("cy",a[1]); dot.setAttribute("r",3);
+    dot.setAttribute("class","dot"); dot.dataset.for = part;
+    const t = document.createElementNS(NS,"text");
+    const pos = txt || (anchor === "end" ? [b[0]-8,b[1]+4] : [b[0]+6,b[1]+4]);
+    t.setAttribute("x",pos[0]); t.setAttribute("y",pos[1]);
+    t.setAttribute("text-anchor",anchor); t.setAttribute("class","lbl"); t.dataset.for = part;
+    g.append(line, dot, t);
+  });
+  document.querySelectorAll("#scheme .ln").forEach(el => el.setAttribute("pathLength","1"));
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce){
+    const s = $("scheme");
+    s.classList.add("draw");
+    setTimeout(() => s.classList.remove("draw"), 2000);
+    setTimeout(startCycle, 2200);
+  }
+  document.querySelectorAll("#scheme .part").forEach(el => {
+    const pick = () => { stopCycle(); setPart(el.dataset.part); };
+    el.addEventListener("mouseenter", pick);
+    el.addEventListener("click", pick);
+    el.addEventListener("focus", pick);
+    el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); pick(); }});
+  });
+}
+function startCycle(){
+  if (cycleTimer) return;
+  cycleTimer = setInterval(() => setPart(CYCLE[(CYCLE.indexOf(active)+1) % CYCLE.length]), 2600);
+}
+function stopCycle(){ clearInterval(cycleTimer); cycleTimer = "stopped"; }
+function setPart(id){
+  active = id;
+  document.querySelectorAll("#scheme [data-part]").forEach(el => el.classList.toggle("on", el.dataset.part === id));
+  document.querySelectorAll("#scheme [data-for]").forEach(el => el.classList.toggle("on", el.dataset.for === id));
+  document.querySelectorAll("#partChips button").forEach(b => b.setAttribute("aria-pressed", b.dataset.p === id));
+  const t = T[lang], p = PARTS[id], [name, sym, time] = p[lang];
+  $("readout").innerHTML = `<div><h3>${name}</h3><p>${sym}</p></div><div class="val"><b>${t.from} ${fmt(p.price)} ${t.cur}</b><span>${t.time}: ${time.toLowerCase()}</span></div>`;
+}
+
+/* ---------- render ---------- */
+function render(){
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.title = t.h1;
+  document.querySelectorAll("[data-k]").forEach(el => el.textContent = t[el.dataset.k]);
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === lang));
+
+  const tel = "tel:" + CONFIG.phone.replace(/\s/g,"");
+  document.querySelectorAll("[data-phone]").forEach(a => { a.href = tel; a.textContent = CONFIG.phone; });
+  document.querySelectorAll("[data-phone-btn]").forEach(a => { a.href = tel; a.innerHTML = phoneIcon + t.call; });
+  document.querySelectorAll("[data-wa]").forEach(a => a.href = wa(t.waHi));
+  $("viber").href = "viber://chat?number=%2B" + CONFIG.whatsapp;
+
+  $("pads").innerHTML = t.pads.map(x => `<li>${x}</li>`).join("");
+
+  document.querySelectorAll("#scheme .part").forEach(el => el.setAttribute("aria-label", PARTS[el.dataset.part][lang][0]));
+  document.querySelectorAll("#scheme .lbl").forEach(el => el.textContent = PARTS[el.dataset.for].short[lang]);
+  $("partChips").innerHTML = CYCLE.map(id => `<button type="button" data-p="${id}">${PARTS[id][lang][0]}</button>`).join("");
+  setPart(active);
+
+  $("tabs").innerHTML = Object.keys(PRICES).map(k => `<button role="tab" data-tab="${k}" aria-selected="${k===tab}">${t.tabs[k]}</button>`).join("");
+  $("priceRows").innerHTML = PRICES[tab].map(r => `<tr><td><b>${r[lang][0]}</b><small>${r[lang][1]}</small></td><td class="t">${r[lang][2]}</td><td class="p${r.price ? "" : " free"}">${r.price ? `${t.from} ${fmt(r.price)} ${t.cur}` : t.free}</td></tr>`).join("");
+
+  $("filters").innerHTML = Object.keys(t.filters).map(k => `<button type="button" data-f="${k}" aria-pressed="${k===filter}">${t.filters[k]}</button>`).join("");
+  $("stockList").innerHTML = LAPTOPS.filter(l => filter === "all" || l.cat === filter).map(l => `
+    <article class="lap">
+      <figure>${l.photo ? `<img src="${l.photo}" alt="${l.name}" loading="lazy">` : laptopSvg}</figure>
+      <div class="in">
+        <h3>${l.name}</h3>
+        <dl><dt>${t.spec[0]}</dt><dd>${l.screen}</dd><dt>${t.spec[1]}</dt><dd>${l.cpu}</dd><dt>${t.spec[2]}</dt><dd>${l.ram}</dd><dt>${t.spec[3]}</dt><dd>${l.disk}</dd></dl>
+        <div class="foot"><span class="cost">${fmt(l.price)} ${t.cur}</span><a class="btn btn-line" target="_blank" rel="noopener" href="${wa(`${t.waLap} ${l.name}`)}">${t.ask}</a></div>
+      </div>
+    </article>`).join("");
+  $("stockList").nextElementSibling.textContent = t.stockNote.replace("{m}", CONFIG.warrantyMonths);
+
+  $("routeList").innerHTML = t.route.map((r,i) => `<li><span class="via">${i+1}</span><h3>${r[0]}</h3><p>${r[1]}</p></li>`).join("");
+  $("facts").innerHTML = t.facts.map(f => `<div><dt>${f[0]}</dt><dd>${f[1]}</dd></div>`).join("");
+  $("copy").textContent = t.copy.replace("{y}", new Date().getFullYear());
+  $("fDevice").innerHTML = t.devices.map(d => `<option>${d}</option>`).join("");
+}
+
+document.addEventListener("click", e => {
+  const l = e.target.closest("[data-l]"), tb = e.target.closest("[data-tab]"), f = e.target.closest("[data-f]"),
+        p = e.target.closest("[data-p]"), o = e.target.closest("[data-open]");
+  if (l){ lang = l.dataset.l; try { localStorage.setItem("lang", lang); } catch(err) {} render(); }
+  if (tb){ tab = tb.dataset.tab; render(); }
+  if (f){ filter = f.dataset.f; render(); }
+  if (p){ stopCycle(); setPart(p.dataset.p); }
+  if (o) $("dlg").showModal();
+});
+$("dlg").addEventListener("close", () => {
+  if ($("dlg").returnValue !== "send") return;
+  const fd = new FormData($("form")), t = T[lang];
+  window.open(wa(`${t.waHi}\n${t.fName}: ${fd.get("name")}\n${t.fDevice}: ${fd.get("device")}\n${t.fArea}: ${fd.get("area")}\n${t.fProblem}: ${fd.get("problem")}`), "_blank");
+  $("form").reset();
+});
+
+buildScheme();
+render();
+</script>
+</body>
+</html>
